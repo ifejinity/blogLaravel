@@ -71,7 +71,7 @@
                                 </div>
                                 `);
                                 // delete blog
-                                let deleteBtn = document.querySelector(".delete");
+                                let deleteBtn = document.querySelectorAll(".delete");
                                 deleteBtn.forEach(btn => {
                                     btn.addEventListener('click', function() {
                                         const id = btn.value;

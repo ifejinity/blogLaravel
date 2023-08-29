@@ -20,6 +20,7 @@ class BlogController extends Controller
     public function about() {
         return view('template.aboutTemplate');
     }
+
     // create blog
     public function post(Request $request) {
         $validator = Validator::make($request->all(),[
