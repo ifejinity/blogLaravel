@@ -26,4 +26,5 @@ Route::prefix("/blog")->group(function () {
     Route::delete('/delete', 'BlogController@deleteBlog')->name('deleteBlog');
     Route::get('/read/{id}', 'BlogController@read')->name('read');
     Route::post('/comment', 'BlogController@comment')->name('comment');
+    Route::delete('/deleteComment', 'BlogController@deleteComment')->name('deleteComment');
 });

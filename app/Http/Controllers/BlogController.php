@@ -136,4 +136,21 @@ class BlogController extends Controller
             return response()->json(['status' => 'failed']);
         }
     }
+    // delete comment
+    public function deleteComment(Request $request) {
+        try{
+            $id = $request->input('id');
+            $toDelete = commentModel::findOrFail($id);
+            $imagePath = public_path('images/' . $toDelete['image']);
+            $blogId = $toDelete['blogId'];
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+                $toDelete->delete();
+                $comments = commentModel::where('blogId', $blogId)->get();
+                return response()->json(['status' => 'success', 'comments' => $comments]);
+            }
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['status' => 'failed']);
+        }
+    }
 }
