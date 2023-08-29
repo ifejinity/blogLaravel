@@ -19,10 +19,6 @@ Route::get('/', function () {
 Route::prefix("/blog")->group(function () {
     Route::get('/', 'BlogController@index')->name('index');
     Route::get('/about', 'BlogController@about')->name('about');
-    Route::post('/post', 'BlogController@post')->name('post');
-    Route::get('/{index}', 'BlogController@blog')->name('blog');
-    Route::post('/upload', 'BlogController@upload')->name('upload');
-    // Route::get('/delete/{image}', 'BlogController@delete')->name('delete');
     Route::delete('/delete', 'BlogController@deleteBlog')->name('deleteBlog');
     Route::get('/read/{id}', 'BlogController@read')->name('read');
     Route::post('/comment', 'BlogController@comment')->name('comment');

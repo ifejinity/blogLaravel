@@ -17,52 +17,8 @@ class BlogController extends Controller
             ->with(['myBlogs' => $myBlogs]);
             
     }
-
     public function about() {
         return view('template.aboutTemplate');
-    }
-
-    public function blog($index) {
-        if (array_key_exists($index, $this->myBlogs)) {
-            $blogs = $this->myBlogs[$index];
-            return view('template.blogTemplate')
-                ->with(['blogs' => $blogs]);
-        } else {
-            return redirect('404');
-        }
-    }
-
-    public function upload(Request $request) {
-        $validated = $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'comment' => 'required|min:6|max:50'
-        ]);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-        } else {
-            $imageName = null;
-        }
-        
-        $comment = $validated['comment'];
-    
-        return redirect()->back()->with([
-            'comments' => [
-                'comment' => $comment,
-                'image' => $imageName
-            ]
-        ]);
-    }
-
-    public function delete($image) {
-        $imagePath = public_path('images/' . $image);
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
-            return redirect()->back()->with('messageDel', 'Delete Success');
-        } else {
-            return redirect()->back()->with('messageDel', 'Delete failed');
-        }
     }
     // create blog
     public function post(Request $request) {
